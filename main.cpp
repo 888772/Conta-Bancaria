@@ -33,7 +33,7 @@ int main()
         int opcao;
         double valor;
         std::cout << "================================================================" << std::endl;
-        std::cout << "BEM VINDO AO PELADOBANK" << std::endl;
+        std::cout << "BEM VINDO AO MONTAINBANK" << std::endl;
         std::cout << "VOCÊ DESEJA:" << std::endl;
         std::cout << "1. DEPOSITAR" << std::endl;
         std::cout << "2. SACAR" << std::endl;
