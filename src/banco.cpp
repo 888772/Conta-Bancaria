@@ -8,6 +8,7 @@ banco::banco()
       cpf(""),
       senha(""),
       saldo(500),
+      saldo_poupanca(0),
       corrente(true),
       poupanca(false),
       status(true)
@@ -28,6 +29,10 @@ std::string banco::getSenha() const{
 
 double banco::getSaldo() const {
     return saldo;
+}
+
+double banco::getSaldoPoupanca() const {
+    return saldo_poupanca;
 }
 
 bool banco::getCorrente() const{
@@ -57,6 +62,10 @@ void banco::setSenha(const std::string& senha) {
 
 double banco::setSaldo(const double& saldo) {
     return this->saldo = saldo;
+}
+
+double banco::setSaldoPoupanca(const double& saldo_poupanca) {
+    return this->saldo_poupanca = saldo_poupanca;
 }
 
 bool banco::setCorrente(const bool& corrente){
@@ -99,6 +108,27 @@ double banco::depositar(double valor){
     return saldo;
 }
 
+double banco::depositar_poupanca(double valor){
+    if (getPoupanca() == true)
+    {
+        if (!validar(valor))
+        {
+            return saldo_poupanca; // não deposita
+        }
+
+        saldo_poupanca += valor;
+
+        return saldo_poupanca;
+    }
+    else
+    {
+        std::cout << "ERRO: CONTA POUPANÇA NÃO FOI CRIADA" << std::endl;
+        return saldo_poupanca;
+    }
+    
+    
+}
+
 double banco::sacar(double valor){
     if(!validar(valor)){
         return saldo;
@@ -109,6 +139,18 @@ double banco::sacar(double valor){
     }
     saldo -= valor;
     return saldo;
+}
+
+double banco::sacar_poupanca(double valor){
+    if(!validar(valor)){
+        return saldo_poupanca;
+    }
+    if(!validar_saldo(valor)){
+        std::cout << "ERRO: VALOR INDEFINIDO" << std::endl;
+        return saldo_poupanca;
+    }
+    saldo_poupanca -= valor;
+    return saldo_poupanca;
 }
 
 // VALIDADOR DE CARACTERES DO CHAT GPT
@@ -213,10 +255,20 @@ bool banco::criar_poupanca(){
         std::cout << "yes/no?" << std::endl;
         std::cin >> opcao;
 
+        std::string senha_validar;
+
         if(opcao == "Yes" or opcao == "yes" or opcao == "YES" or opcao == "Y" or opcao == "y"){
-            std::cout << "CONTA POUPANÇA CRIADA COM SUCESSO!!!" << std::endl;
-            std::cout << "===============================================" << std::endl;
-            return poupanca = true;
+            std::cout << "Digite sua senha segura" << std::endl;
+            std::cin >> senha_validar;
+            if(senha_validar == getSenha()){
+                std::cout << "CONTA POUPANÇA CRIADA COM SUCESSO!!!" << std::endl;
+                std::cout << "===============================================" << std::endl;
+                return poupanca = true;
+            }
+            else{
+                std::cout << "SENHA ERRADA" << std::endl;
+                std::cout << "===============================================" << std::endl;
+            }
         }
         else if (opcao == "No" or opcao == "no" or opcao == "NO" or opcao == "N" or opcao == "n")
         {

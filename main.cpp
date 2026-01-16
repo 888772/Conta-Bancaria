@@ -33,24 +33,25 @@ int main()
         int opcao;
         double valor;
         std::cout << "================================================================" << std::endl;
-        std::cout << "BEM VINDO AO PELADOBANK" << std::endl;
+        std::cout << "BEM VINDO AO MOUNTAINBANK" << std::endl;
         std::cout << "VOCÊ DESEJA:" << std::endl;
         std::cout << "1. DEPOSITAR" << std::endl;
-        std::cout << "2. SACAR" << std::endl;
-        std::cout << "3. PIX" << std::endl;
+        std::cout << "2. DEPOSITAR POUPANÇA" << std::endl;
+        std::cout << "3. SACAR" << std::endl;
+        std::cout << "4. PIX" << std::endl;
         if (cliente1.getPoupanca() == false)
         {
-            std::cout << "4. CRIAR CONTA POUPANÇA" << std::endl;
+            std::cout << "5. CRIAR CONTA POUPANÇA" << std::endl;
         }
-        std::cout << "5. SALDO" << std::endl;
-        std::cout << "6. SAIR" << std::endl;
+        std::cout << "6. SALDO" << std::endl;
+        std::cout << "7. SAIR" << std::endl;
         std::cout << "DIGITE A OPÇÃO QUE DESEJA:" << std::endl;
         std::cin >> opcao;
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "================================================================" << std::endl;
 
         // condição para encerramento
-        if(opcao == 6)
+        if(opcao == 7)
         {
             std::cout << "O sistema foi encerrado." << std::endl;
             break;
@@ -65,12 +66,18 @@ int main()
                 valor = 0;
                 break;
             case 2:
+                std::cout << "Digite o valor a ser Depositado" << std::endl;
+                std::cin >> valor;
+                cliente1.depositar_poupanca(valor);
+                valor = 0;
+                break;
+            case 3:
                 std::cout << "Digite o valor a ser sacado" << std::endl;
                 std::cin >> valor;
                 cliente1.sacar(valor);
                 valor = 0;
                 break;
-            case 3:
+            case 4:
                 std::cout << "Digite sua senha segura" << std::endl;
                 std::cin >> senha_validar;
                 if(senha_validar == cliente1.getSenha()){
@@ -81,11 +88,18 @@ int main()
                     std::cout << "SENHA ERRADA" << std::endl;
                 }
                 break;
-            case 4:
+            case 5:
                 cliente1.criar_poupanca();
                 break;
-            case 5:
-                std::cout << "SALDO: " << cliente1.getSaldo() << std::endl;
+            case 6:
+                std::cout << "SALDO CORRENTE: " << cliente1.getSaldo() << std::endl;
+                if(cliente1.getPoupanca() == true){
+                    std::cout << "SALDO POUPANCA: " << cliente1.getSaldoPoupanca() << std::endl;
+                }
+                // else{
+                //     std::cout << "Voce ainda não tem conta poupança" << std::endl;
+                // }
+                break;
             default:
                 break;
         }

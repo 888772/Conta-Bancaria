@@ -10,6 +10,7 @@ private:
     std::string cpf;
     std::string senha;
     double saldo;
+    double saldo_poupanca;
     bool corrente;
     bool poupanca;
     bool status;
@@ -22,6 +23,7 @@ public:
     bool getCorrente() const;
     bool getPoupanca() const;
     double getSaldo() const;
+    double getSaldoPoupanca() const;
 
     void setNome(const std::string& nome);
     void setCpf(const std::string& cpf);
@@ -30,11 +32,14 @@ public:
     bool setCorrente(const bool& corrente);
     bool setPoupanca(const bool& poupanca);
     double setSaldo(const double& saldo);
+    double setSaldoPoupanca(const double& saldo_poupanca);
     
 
     bool validar_saldo(double valor) const;
     double depositar(double valor);
+    double depositar_poupanca(double valor);
     double sacar(double valor);
+    double sacar_poupanca(double valor);
     double pix();
     bool criar_poupanca();
 
