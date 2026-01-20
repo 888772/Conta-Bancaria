@@ -10,6 +10,7 @@ std::string novo_cpf;
 std::string nova_senha;
 
 void criar_conta();
+float digitar_valor(valor);
 
 int main()
 {
@@ -60,29 +61,20 @@ int main()
         switch (opcao)
         {
             case 1:
-                std::cout << "Digite o valor a ser Depositado" << std::endl;
-                std::cin >> valor;
-                cliente1.depositar(valor);
+                cliente1.depositar(digitar_valor(valor));
                 valor = 0;
                 break;
             case 2:
-                std::cout << "Digite o valor a ser Depositado" << std::endl;
-                std::cin >> valor;
-                cliente1.depositar_poupanca(valor);
+                cliente1.depositar_poupanca(digitar_valor(valor));
                 valor = 0;
                 break;
             case 3:
-                std::cout << "Digite o valor a ser sacado" << std::endl;
-                std::cin >> valor;
-                cliente1.sacar(valor);
+                cliente1.sacar(digitar_valor(valor));
                 valor = 0;
                 break;
             case 4:
-                std::cout << "Digite sua senha segura" << std::endl;
-                std::cin >> senha_validar;
                 if(senha_validar == cliente1.getSenha()){
                     cliente1.pix();
-                    valor = 0;
                 }
                 else{
                     std::cout << "SENHA ERRADA" << std::endl;
@@ -121,4 +113,10 @@ void criar_conta(){
     std::getline(std::cin, novo_cpf);
     std::cout << "Digite uma senha segura" << std::endl;
     std::getline(std::cin, nova_senha);
+}
+
+float digitar_valor(int valor){
+	std::cout << "Digite o valor" << std::endl;
+    std::cin >> valor;
+    return valor;
 }
